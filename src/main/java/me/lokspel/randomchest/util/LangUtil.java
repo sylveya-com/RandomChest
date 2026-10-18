@@ -1,4 +1,4 @@
-package me.lokspel.randomchest.config;
+package me.lokspel.randomchest.util;
 
 import me.lokspel.randomchest.RandomChest;
 import org.bukkit.ChatColor;
@@ -7,15 +7,14 @@ import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
 
-@SuppressWarnings("deprecation")
-public final class MessagesConfig {
+public final class LangUtil {
 
     private static final String PREFIX_KEY = "prefix";
 
     private final RandomChest plugin;
     private FileConfiguration config;
 
-    public MessagesConfig(RandomChest plugin) {
+    public LangUtil(RandomChest plugin) {
         this.plugin = plugin;
         this.config = load();
     }

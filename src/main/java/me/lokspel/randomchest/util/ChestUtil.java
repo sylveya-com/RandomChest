@@ -420,7 +420,6 @@ public class ChestUtil {
         );
     }
 
-    @SuppressWarnings("deprecation")
     private void applyMeta(
             ItemStack item,
             String name,
@@ -448,8 +447,8 @@ public class ChestUtil {
         }
 
         if (skull != null && meta instanceof SkullMeta skullMeta) {
-            skullMeta.setPlayerProfile(
-                    Bukkit.createProfile(skull)
+            skullMeta.setOwnerProfile(
+                    Bukkit.createPlayerProfile(skull)
             );
         }
 

@@ -6,11 +6,11 @@ import me.lokspel.randomchest.command.ReloadCommand;
 import me.lokspel.randomchest.command.RestoreCommand;
 import me.lokspel.randomchest.command.SelectCommand;
 import me.lokspel.randomchest.command.UnselectCommand;
-import me.lokspel.randomchest.config.MessagesConfig;
 import me.lokspel.randomchest.listener.BlockBreakListener;
 import me.lokspel.randomchest.listener.InventoryCloseListener;
 import me.lokspel.randomchest.listener.PlayerInteractListener;
 import me.lokspel.randomchest.util.ChestUtil;
+import me.lokspel.randomchest.util.LangUtil;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bstats.bukkit.Metrics;
@@ -21,7 +21,7 @@ import java.util.Objects;
 
 public final class RandomChest extends JavaPlugin {
 
-    private MessagesConfig messages;
+    private LangUtil messages;
     private ChestUtil chestUtil;
     private FoliaLib foliaLib;
 
@@ -30,7 +30,7 @@ public final class RandomChest extends JavaPlugin {
         saveDefaultConfig();
 
         foliaLib = new FoliaLib(this);
-        messages = new MessagesConfig(this);
+        messages = new LangUtil(this);
         chestUtil = new ChestUtil(this);
 
         CommandDispatcher dispatcher = new CommandDispatcher(this, Arrays.asList(
@@ -61,7 +61,11 @@ public final class RandomChest extends JavaPlugin {
         }
     }
 
-    public MessagesConfig getMessages() {
+    public LangUtil getMessages() {
+        return messages;
+    }
+
+    public LangUtil getLangUtil() {
         return messages;
     }
 
