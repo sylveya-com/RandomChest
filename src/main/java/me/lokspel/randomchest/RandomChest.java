@@ -65,10 +65,6 @@ public final class RandomChest extends JavaPlugin {
         return messages;
     }
 
-    public LangUtil getLangUtil() {
-        return messages;
-    }
-
     public ChestUtil getChestUtil() {
         return chestUtil;
     }
