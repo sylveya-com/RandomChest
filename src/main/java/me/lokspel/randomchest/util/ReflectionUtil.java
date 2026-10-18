@@ -1,5 +1,6 @@
 package me.lokspel.randomchest.util;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.LivingEntity;
@@ -7,6 +8,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.inventory.meta.SkullMeta;
 
 import java.lang.reflect.Method;
 import java.util.Set;
@@ -77,6 +79,17 @@ public final class ReflectionUtil {
             return (Block) legacy.invoke(player, (Set<Material>) null, range);
         } catch (ReflectiveOperationException ignored) {
             return null;
+        }
+    }
+
+    public static void setOwner(SkullMeta skullMeta, String skull) {
+        try {
+            skullMeta.setOwnerProfile(Bukkit.createPlayerProfile(skull));
+        } catch (NoSuchMethodError | Exception e) {
+            try {
+                SkullMeta.class.getMethod("setOwner", String.class).invoke(skullMeta, skull);
+            } catch (ReflectiveOperationException ignored) {
+            }
         }
     }
 }

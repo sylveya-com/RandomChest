@@ -2,7 +2,6 @@ package me.lokspel.randomchest.util;
 
 import me.lokspel.randomchest.RandomChest;
 import me.lokspel.randomchest.task.RespawnTask;
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -447,9 +446,7 @@ public class ChestUtil {
         }
 
         if (skull != null && meta instanceof SkullMeta skullMeta) {
-            skullMeta.setOwnerProfile(
-                    Bukkit.createPlayerProfile(skull)
-            );
+            ReflectionUtil.setOwner(skullMeta, skull);
         }
 
         item.setItemMeta(meta);
