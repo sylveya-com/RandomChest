@@ -2,6 +2,7 @@ package me.lokspel.randomchest.listener;
 
 import me.lokspel.randomchest.RandomChest;
 import me.lokspel.randomchest.util.ChestUtil;
+import me.lokspel.randomchest.util.MessageUtil;
 import me.lokspel.randomchest.util.ReflectionUtil;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -44,7 +45,7 @@ public class InventoryCloseListener implements Listener {
         }
 
         if (!player.hasPermission("randomchest.use")) {
-            player.sendMessage(plugin.getMessages().prefixed("no-permission"));
+            MessageUtil.send(player, "no-permission");
             return;
         }
 

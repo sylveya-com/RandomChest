@@ -1,45 +1,35 @@
 package me.lokspel.randomchest;
 
-import me.lokspel.randomchest.command.CommandDispatcher;
-import me.lokspel.randomchest.command.RegisteredCommand;
-import me.lokspel.randomchest.command.ReloadCommand;
-import me.lokspel.randomchest.command.RestoreCommand;
-import me.lokspel.randomchest.command.SelectCommand;
-import me.lokspel.randomchest.command.UnselectCommand;
+import com.tcoded.folialib.FoliaLib;
+import me.lokspel.randomchest.commands.randomchest.RandomChestCmd;
+import me.lokspel.randomchest.config.MessagesConfig;
 import me.lokspel.randomchest.listener.BlockBreakListener;
 import me.lokspel.randomchest.listener.InventoryCloseListener;
 import me.lokspel.randomchest.listener.PlayerInteractListener;
 import me.lokspel.randomchest.util.ChestUtil;
-import me.lokspel.randomchest.util.LangUtil;
+import me.lokspel.randomchest.util.PluginPermission;
+import org.bstats.bukkit.Metrics;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bstats.bukkit.Metrics;
-import com.tcoded.folialib.FoliaLib;
-
-import java.util.Arrays;
-import java.util.Objects;
 
 public final class RandomChest extends JavaPlugin {
 
-    private LangUtil messages;
+    private static RandomChest instance;
+    private MessagesConfig messages;
     private ChestUtil chestUtil;
     private FoliaLib foliaLib;
 
     @Override
     public void onEnable() {
+        instance = this;
         saveDefaultConfig();
 
         foliaLib = new FoliaLib(this);
-        messages = new LangUtil(this);
+        messages = new MessagesConfig(this);
         chestUtil = new ChestUtil(this);
 
-        CommandDispatcher dispatcher = new CommandDispatcher(this, Arrays.asList(
-                new RegisteredCommand("reload", new ReloadCommand(this)),
-                new RegisteredCommand("select", new SelectCommand(this)),
-                new RegisteredCommand("unselect", new UnselectCommand(this)),
-                new RegisteredCommand("restore", new RestoreCommand(this))
-        ));
-        Objects.requireNonNull(getCommand("randomchest")).setExecutor(dispatcher);
+        PluginPermission.registerAll();
+        new RandomChestCmd().enable();
 
         PluginManager pm = getServer().getPluginManager();
         pm.registerEvents(new PlayerInteractListener(this), this);
@@ -53,6 +43,7 @@ public final class RandomChest extends JavaPlugin {
 
     @Override
     public void onDisable() {
+        PluginPermission.unregisterAll();
         if (foliaLib != null) {
             foliaLib.getScheduler().cancelAllTasks();
         }
@@ -61,7 +52,11 @@ public final class RandomChest extends JavaPlugin {
         }
     }
 
-    public LangUtil getMessages() {
+    public static RandomChest getInstance() {
+        return instance;
+    }
+
+    public MessagesConfig getMessages() {
         return messages;
     }
 

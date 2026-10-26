@@ -2,6 +2,7 @@ package me.lokspel.randomchest.listener;
 
 import me.lokspel.randomchest.RandomChest;
 import me.lokspel.randomchest.util.ChestUtil;
+import me.lokspel.randomchest.util.MessageUtil;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
@@ -36,7 +37,7 @@ public class BlockBreakListener implements Listener {
         if (utils.isSetExist(chestType)) {
             event.setCancelled(utils.isProtected(chestType));
         } else {
-            player.sendMessage(plugin.getMessages().prefixed("type-not-found", "type", chestType));
+            MessageUtil.send(player, "type-not-found", "type", chestType);
         }
     }
 }

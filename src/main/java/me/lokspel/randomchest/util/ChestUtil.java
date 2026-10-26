@@ -1,6 +1,7 @@
 package me.lokspel.randomchest.util;
 
 import me.lokspel.randomchest.RandomChest;
+import me.lokspel.randomchest.database.ChestDatabase;
 import me.lokspel.randomchest.task.RespawnTask;
 import org.bukkit.Location;
 import org.bukkit.Material;

@@ -2,6 +2,7 @@ package me.lokspel.randomchest.listener;
 
 import me.lokspel.randomchest.RandomChest;
 import me.lokspel.randomchest.util.ChestUtil;
+import me.lokspel.randomchest.util.MessageUtil;
 import me.lokspel.randomchest.util.ReflectionUtil;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
@@ -54,7 +55,7 @@ public class PlayerInteractListener implements Listener {
                 && selectTool != null && ReflectionUtil.getItemInHand(player).getType().equals(selectTool)
                 && player.getGameMode().equals(GameMode.CREATIVE)) {
             utils.addChest(player, block);
-            player.sendMessage(plugin.getMessages().prefixed("add"));
+            MessageUtil.send(player, "add");
             event.setCancelled(true);
             return;
         }
@@ -63,7 +64,7 @@ public class PlayerInteractListener implements Listener {
                 && ReflectionUtil.getItemInHand(player).getType().equals(removeTool)
                 && player.getGameMode().equals(GameMode.CREATIVE)) {
             utils.removeChest(block);
-            player.sendMessage(plugin.getMessages().prefixed("remove"));
+            MessageUtil.send(player, "remove");
             event.setCancelled(true);
             return;
         }
@@ -75,12 +76,12 @@ public class PlayerInteractListener implements Listener {
 
         if (!player.hasPermission("randomchest.use")) {
             event.setCancelled(true);
-            player.sendMessage(plugin.getMessages().prefixed("no-permission"));
+            MessageUtil.send(player, "no-permission");
             return;
         }
 
         if (!utils.isSetExist(chestType)) {
-            player.sendMessage(plugin.getMessages().prefixed("type-not-found", "type", chestType));
+            MessageUtil.send(player, "type-not-found", "type", chestType);
             return;
         }
 
@@ -101,7 +102,7 @@ public class PlayerInteractListener implements Listener {
 
         if (!player.hasPermission("randomchest.use")) {
             event.setCancelled(true);
-            player.sendMessage(plugin.getMessages().prefixed("no-permission"));
+            MessageUtil.send(player, "no-permission");
             return;
         }
 

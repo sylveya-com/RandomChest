@@ -1,4 +1,4 @@
-package me.lokspel.randomchest.util;
+package me.lokspel.randomchest.database;
 
 import me.lokspel.randomchest.RandomChest;
 import org.bukkit.Bukkit;
