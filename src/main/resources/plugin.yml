@@ -10,11 +10,3 @@ commands:
     description: Main RandomChest command
     usage: /<command> [reload|select|unselect|restore]
     aliases: [rs]
-
-permissions:
-  randomchest.use:
-    description: Allows using random chests
-    default: true
-  randomchest.admin:
-    description: Allows admin commands
-    default: op
